@@ -1,0 +1,85 @@
+import random 
+
+players = int(input("Please entre no. of players: "))
+
+#initial bet
+i = 0
+wallet = 100
+while wallet >= 10:
+    if i == 0:
+        coinresult = random.randint(0,1) #generating rsult of coin
+        BetOn = int(input('''"If heads then press 0; if tails then 1"\nPlease entre your choice bet: '''))
+
+        if BetOn <= 1 :
+            if BetOn == 0:
+                betonvalue = 'Heads'
+            else :
+                betonvalue = 'Tails'
+
+            betAmmount = int(input("Entre the bet amount : "))
+            if betAmmount > wallet:
+                print(f"sorry you have enterred an ammount greater than your wallet ballance \nPlease entre an ammount lesse than {wallet}")
+                #continue
+            else :
+                def result(coinresult,BetOn):
+                    if coinresult == BetOn :
+                       return True
+
+                    return False
+                outcome = result(coinresult,BetOn) 
+                #transactions
+                if outcome == True:
+                    wallet = wallet + betAmmount*2
+                    print(f"You have won as you choose {betonvalue}")
+                else:
+                    wallet = wallet - betAmmount
+                    print(f"You looseas you choose {betonvalue}")
+
+                print(f"{coinresult,BetOn,} , 'balance = ' , {wallet}\n ")
+                i = i+1
+        else:
+            print("Please entre a valid bet as 0 or 1 \n")
+    else: #generating bets of next rounds
+        coinresult = random.randint(0,1)
+        ask = input("Do u still wanna play ? : Y or N : ") 
+        ask = ask.upper()
+        #print(ask)
+        if ask == 'Y':
+            BetOn = int(input('''New Bet >>>>>>>>>>\nPlease entre your choice of bet: 0 or 1 : '''))
+
+            if BetOn <= 1 :
+                if BetOn == 0:
+                    betonvalue = 'Heads'
+                else :
+                    betonvalue = 'Tails'
+
+                betAmmount = int(input("Entre the bet amount : "))
+                if betAmmount > wallet:
+                    print(f"sorry you have enterred an ammount greater than your wallet ballance \nPlease entre an ammount lesse than {wallet}")
+                    #continue
+                else :
+                    def result(coinresult,BetOn):
+                        if coinresult == BetOn :
+                           return True
+
+                        return False
+                    outcome = result(coinresult,BetOn) 
+                    #transactions
+                    if outcome == True:
+                        wallet = wallet + betAmmount*2
+                        print(f"You have won as you choose {betonvalue}")
+                    else:
+                        wallet = wallet - betAmmount
+                        print(f"You looseas you choose {betonvalue}")
+
+                    print(f"{coinresult,BetOn,} , 'balance = ' , {wallet}\n ")
+                    i = i+1
+            else:
+                print("Please entre a valid bet as 0 or 1 \n")
+        if ask == 'N':
+            print(f"Thanks for Playing\nYou have bagged a total sum of '{wallet}' while playing {i} rounds" )
+            break
+
+if wallet < 10:
+    print(f"Sorry as your wallet ablance is :{wallet} Hence you cannot play furthur ")
+
